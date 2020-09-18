@@ -67,10 +67,14 @@ import fs from 'fs';
    
       res.on('finish', () => {
         console.log('delete file from server.ts ', filteredImageFile);
+        console.log('current working dir', __dirname);
+        tempFilePath = `${__dirname}`+'/util/tmp';
+        console.log('temp file path', tempFilePath);
         //deleteLocalFiles(imageFileArray);
-        var files = fs.readdirSync('src/util/tmp/');
-        console.log('contents of src/util/tmp ', files);
-        tempFilePath = `${__dirname}`+'/util/tmp/';
+        //var files = fs.readdirSync('util/tmp/');
+        var files = fs.readdirSync(tempFilePath);
+        console.log('contents temp dir', files);
+        
         deleteLocalFilesWithDir(tempFilePath,files);
 
         console.log('file deletion complete');
