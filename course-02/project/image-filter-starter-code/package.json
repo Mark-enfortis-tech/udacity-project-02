@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node .",
+    "start": "echo pwd && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf www/ || true",
-    "build": "npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts"
+    "clean": "echo pwd && rm -rf www/ || true",
+    "build": "echo pwd && npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
+    "dev": "echo pwd && ts-node-dev --respawn --transpileOnly ./src/server.ts"
   },
   "repository": {
     "type": "git",
