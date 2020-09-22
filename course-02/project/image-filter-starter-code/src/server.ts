@@ -81,8 +81,13 @@ import fs from 'fs';
       })
     } catch(error) {
       console.log('caught error from filterImageFromURL()', error);
-      res.status(404).send('incorrect file format');
+      res.status(422).send('unprocessable entity');
     }
+  })
+
+  app.use(function(req, res){
+    console.log('incorrect url');
+    res.status(404).send('incorrect url');
   })
   
 
