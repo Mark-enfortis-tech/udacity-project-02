@@ -61,8 +61,6 @@ import fs from 'fs';
 
       // send file back to client in resp.send()
       res.status(200);
-      //res.send(`returning file ${filteredImageFile}`);
-      //res.send('hello from c2-image-filter/filteredimage endpoint');
       res.sendFile(filteredImageFile);
    
       res.on('finish', () => {
@@ -70,8 +68,7 @@ import fs from 'fs';
         console.log('current working dir', __dirname);
         tempFilePath = `${__dirname}`+'/util/tmp';
         console.log('temp file path', tempFilePath);
-        //deleteLocalFiles(imageFileArray);
-        //var files = fs.readdirSync('util/tmp/');
+
         var files = fs.readdirSync(tempFilePath);
         console.log('contents temp dir', files);
         
