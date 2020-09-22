@@ -4,9 +4,9 @@ aws_image_host: http://image-filter2.us-east-2.elasticbeanstalk.com/filteredimag
 Test query parameter:      image_url: https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg 
 
 Expected responses:
-   correct url and query params:   returns compressed image of cat with status == 200,
-   correct url and incorrect query params: returns message 'file not found' and status == 404,
-   incorrect url: returns message 'bad request' and status == 400. 
+   correct url and query params:   returns compressed image and status == 200,
+   correct url and incorrect query filename: returns message 'file not found' and status == 404,
+   incorrect url: returns message 'incorrect url' and status == 404. 
 
 
 Use Udacity-c2-restapi for access to image filtering service.
@@ -15,6 +15,7 @@ github repo: https://github.com/Mark-enfortis-tech/mark-cloud-developer.git
 
 {{aws_image_host}}//api/v0/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg 
 
-   correct url and query params:   returns compressed image of cat with status == 200,
-   correct url and incorrect query params: returns message 'file not found' and status == 404,
-   incorrect url: returns message 'bad request' and status == 400.
+   Expected responses:
+   correct url and query params:   returns compressed image and status == 200,
+   correct url and incorrect query filename: returns message 'file not found' and status == 404,
+   incorrect url: returns message 'incorrect url' and status == 404.
