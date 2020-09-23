@@ -1,6 +1,7 @@
 import express from 'express';
+import { Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFilesWithDir} from './util/util';
+import { filterImageFromURL, deleteLocalFilesWithDir } from './util/util';
 import fs from 'fs';
 
 (async () => {
@@ -13,8 +14,7 @@ import fs from 'fs';
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
-  var imageFileArray = [""];
-  var tempFilePath = "";
+  
 
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
@@ -31,28 +31,24 @@ import fs from 'fs';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-
   //! END @TODO1
   
-  // Root Endpoint
-  // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  // root Endpoint
+  app.get( "/", async ( req: Request, res: Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
 
 
-  
+  // filtering microservice endpoint
+  app.get("/filteredimage", async(req: Request, res: Response) => {
+    let imageFileArray: string[] = [""];
+    let tempFilePath: string = "";
+    let inputFile: string = req.query.image_url;
+    let filteredImageFile: string = "";
 
-  // add new filtering microservice endpoint
-  app.get("/filteredimage", async(req, res) => {
     console.log('hello from c2-image-filter/filteredimage endpoint');
     console.log(`req params: ${req.query.image_url}`);
-
-    let inputFile = req.query.image_url;
-
     console.log('calling filterImageFromURL()');
-     
-    var filteredImageFile = "";
 
     try{
       filteredImageFile = await filterImageFromURL(inputFile);
@@ -69,11 +65,10 @@ import fs from 'fs';
         tempFilePath = `${__dirname}`+'/util/tmp';
         console.log('temp file path', tempFilePath);
 
-        var files = fs.readdirSync(tempFilePath);
+        let files: string[] = fs.readdirSync(tempFilePath);
         console.log('contents temp dir', files);
         
         deleteLocalFilesWithDir(tempFilePath,files);
-
         console.log('file deletion complete');
       })
     } catch(error) {
@@ -82,7 +77,8 @@ import fs from 'fs';
     }
   })
 
-  app.use(function(req, res){
+  // remaining routes
+  app.use(function(req: Request, res: Response){
     console.log('incorrect url');
     res.status(404).send('incorrect url');
   })
