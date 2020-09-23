@@ -14,7 +14,7 @@ import fs from 'fs';
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
   var imageFileArray = [""];
-  var tempFilePath = "";
+  var tempFilePath: string = "";
 
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
