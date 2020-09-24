@@ -1,21 +1,60 @@
-Project: image filtering service
-Description: provides hosted image filtering service with the following features:
-aws_image_host: http://image-filter2.us-east-2.elasticbeanstalk.com/filteredimage
-Test query parameter:      image_url: https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg 
 
-Expected responses:
-   correct url and query params:   returns compressed image and status == 200,
-   correct url and incorrect query filename: returns message 'file not found' and status == 404,
-   incorrect url: returns message 'incorrect url' and status == 404. 
+# IMAGE FILTERING SERVICE
+
+## Udacity Cloud Development - Project 2 
+
+---
+
+This is an Express/ Node rest api based web service that provides a URL in which a client application can use to filter image files.
+
+---
+
+## Build Status
+build passing
+
+---
+
+## AWS host URL
+[Link](http://image-filter-0-0-1.us-east-2.elasticbeanstalk.com/)
+
+---
+
+**API Reference**
+
+   GET /filteredimage
+
+      Query Parameters:
+         key: image_url
+         value: *url for image*
+
+**Successful Response Codes**
+
+         Code: 200: 
+         Content {file: image}
 
 
-Use Udacity-c2-restapi for access to image filtering service.
-server url:  http://udacity-c2-restapi-dev22222222.us-east-2.elasticbeanstalk.com/
-github repo: https://github.com/Mark-enfortis-tech/mark-cloud-developer.git
 
-{{aws_image_host}}//api/v0/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg 
+**Error Codes**
 
-   Expected responses:
-   correct url and query params:   returns compressed image and status == 200,
-   correct url and incorrect query filename: returns message 'file not found' and status == 404,
-   incorrect url: returns message 'incorrect url' and status == 404.
+         Code: 404 
+         Content: {error : "incorrect api endpoint"}
+
+         Code: 422
+         Content: {error : "Unprocessable entity"}
+
+
+## Additional Activities:
+
+Udacity-c2-restapi application was refactored to include this API. 
+
+Usage: curl http://udacity-c2-restapi-dev22222222.us-east-2.elasticbeanstalk.com/api/v0/feed/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg
+
+
+
+
+
+
+
+
+
+
